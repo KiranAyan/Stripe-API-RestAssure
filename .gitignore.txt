@@ -1,0 +1,6 @@
+/target/
+out/
+.settings/
+.classpath
+.project
+src/test/resources/object.properties
