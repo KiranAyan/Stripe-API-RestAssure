@@ -13,6 +13,6 @@ public class LoadVariables {
         prop = new Properties();
         FileInputStream fis = new FileInputStream("src/test/resources/propertyFiles/object.properties");
         prop.load(fis);
-        System.out.println("Global Setup: Properties loaded.");
+        System.out.println("Global Setup123: Properties loaded.");
     }
 }
