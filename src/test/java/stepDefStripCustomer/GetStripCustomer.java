@@ -19,7 +19,18 @@ public class GetStripCustomer {
     public void setBaseURI() {
         // In a real framework, you would get this from object.properties
     	 RestAssured.baseURI = LoadVariables.prop.getProperty("baseURI");
-         secretKey = LoadVariables.prop.getProperty("secretkey");
+    	 String jenkinsKey = System.getenv("secretkey");
+    	    if (jenkinsKey == null) {
+    	        jenkinsKey = System.getProperty("secretkey");
+    	    }
+
+    	    if (jenkinsKey != null && !jenkinsKey.isEmpty()) {
+    	        secretKey = jenkinsKey.trim();
+    	        System.out.println("Using Secret Key from Jenkins/System environment.");
+    	    } else {
+    	        secretKey = LoadVariables.prop.getProperty("secretkey").trim();
+    	        System.out.println("Using Secret Key from local property file.");
+    	    }
          endPoint = LoadVariables.prop.getProperty("endpoint");
     }
 
