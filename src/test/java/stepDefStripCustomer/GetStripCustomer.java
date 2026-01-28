@@ -28,7 +28,8 @@ public class GetStripCustomer {
     	        secretKey = jenkinsKey.trim();
     	        System.out.println("Using Secret Key from Jenkins/System environment.");
     	    } else {
-    	        secretKey = LoadVariables.prop.getProperty("secretkey").trim();
+    	        secretKey = LoadVariables.prop.getProperty("secretkey");
+    	        System.out.println(secretKey);
     	        System.out.println("Using Secret Key from local property file.");
     	    }
          endPoint = LoadVariables.prop.getProperty("endpoint");
@@ -59,6 +60,18 @@ public class GetStripCustomer {
             throw new RuntimeException("The key '" + expectedID + "' was not found in object.properties!");
         }
         response.then().body("id", equalTo(customerId));
+        response.prettyPrint(); // Optional: print to console
+    }
+    
+    @Then("the response body should contain id {string}")	
+    public void verify_customer_idFearure(String expectedID) {
+    	System.out.println(expectedID);
+        
+        // 2. Add a check to ensure the key actually existed in your file
+        if(expectedID == null) {
+            throw new RuntimeException("The key '" + expectedID + "' was not found in object.properties!");
+        }
+        response.then().body("id", equalTo(expectedID));
         response.prettyPrint(); // Optional: print to console
     }
 }
