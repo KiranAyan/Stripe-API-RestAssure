@@ -66,7 +66,7 @@ public class GetStripCustomer {
     @Then("the response body should contain id {string}")	
     public void verify_customer_idFearure(String expectedID) {
     	System.out.println(expectedID);
-        
+    	System.out.println("CI/CD also ran scuccessfully");
         // 2. Add a check to ensure the key actually existed in your file
         if(expectedID == null) {
             throw new RuntimeException("The key '" + expectedID + "' was not found in object.properties!");
